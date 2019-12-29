@@ -1,14 +1,13 @@
-import pygame
 import sys
+import pygame
 
 pygame.init()
 # create game window
 screen = pygame.display.set_mode((930, 930))
 # Title and Icon
-pygame.display.set_caption("Sudoku Solver") # title
+pygame.display.set_caption("Sudoku Solver")  # title
 icon = pygame.image.load("sudoku.png")
 pygame.display.set_icon(icon)
-
 # dimensions for each rectangle in the 9x9 grid
 width = 100
 height = 100
@@ -28,33 +27,37 @@ chosen_box_y = 0
 storednums = []
 for row in range(9):
     storednums.append([0, 0, 0, 0, 0, 0, 0, 0, 0])
-# draw rectange function
+
+
 def draw_rectangle(x, y, color):
+    """Draws rectagles onto the screen."""
     global screen
     global margin
     global width
     global height
     pygame.draw.rect(screen, color, [((margin + width) * x + margin),
-                                        ((margin + height) * y + margin),
-                                        width,
-                                        height])
+                                     ((margin + height) * y + margin),
+                                     width, height])
+
+
 def show_numbers(num, x, y):
+    """Draws numbers onto the screen."""
     global number_font
     num_text = number_font.render(num, True, black)
     screen.blit(num_text, (x, y))
+
+
 # functions for solving algorithm
 def find_empty(board):
-    '''
-    Returns rows and columns (respectively) of some empty square
-    '''
+    """Return rows and columns (respectively) of some empty square."""
     for i in range(len(board)):
         for j in range(len(board[0])):
             if board[i][j] == 0:
                 return (i, j)
+
+
 def isValid(board, num, pos):
-    '''
-    Returns whether or not the given num is valid at some position on the board
-    '''
+    """Return whether or not the given num is valid at some position on the board."""
     # Check row
     for i in range(len(board[0])):
         # Loops through every column in a row and checks if the value is present and thus invalid
@@ -76,10 +79,11 @@ def isValid(board, num, pos):
     # returns true if all checks satisfied
     return True
 
+
 def solve(board):
-    '''
-    Recursive implementation of solving the board
-    '''
+    """
+    Recursive implementation of solving the board.
+    """
     global margin
     # base case - the end of the board has been reached by the algorithm
     # i.e no more empty squares
@@ -101,29 +105,32 @@ def solve(board):
             board[row][col] = 0
 
     return False
+
+
 # ----------------------------- INTRO LOOP ---------------------------------------------
 intro_running = True
 while intro_running:
     screen.fill(white)
     intro_text = ["Hello! This is a sudoku puzzle solver.",
-    "Sudoku is played on a 9x9 board with numbers 1-9",
-    "where the rules are as follows:",
-    "1.  No number may appear in the same row twice.",
-    "2. No number may appear in the same column twice.",
-    "3. No number may appear in the same 3x3 square.",
-    # "   marked by thicker lines on the board.", <-- WIP feature
-    "",
-    "Instructions:",
-    "Click a square and type a number to add it to the board.",
-    "Press SPACE to solve the puzzle and R to reset the board.",
-    "Press SPACE to begin!"]
+                  "Sudoku is played on a 9x9 board with numbers 1-9",
+                  "where the rules are as follows:",
+                  "1.  No number may appear in the same row twice.",
+                  "2. No number may appear in the same column twice.",
+                  "3. No number may appear in the same 3x3 square.",
+                  # "   marked by thicker lines on the board.", <-- WIP feature
+                  "",
+                  "Instructions:",
+                  "Click a square and type a number to add it to the board.",
+                  "Press SPACE to solve the puzzle and R to reset the board.",
+                  "Press SPACE to begin!"]
     label = []
     for line in intro_text:
         label.append(intro_font.render(line, True, black))
     for line in range(len(label)):
         screen.blit(label[line], (10, 50 + 50 * line))
     for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
+        if event.type == pygame.QUIT:
+            sys.exit()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 intro_running = False
@@ -147,7 +154,8 @@ while running:
                 show_numbers(str(storednums[column][row]), row*100 + 40 + margin*row, column*100 + 20 + margin*column)
 
     for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
+        if event.type == pygame.QUIT:
+            sys.exit()
         # let user enter numbers
         if event.type == pygame.MOUSEBUTTONDOWN:
             position = pygame.mouse.get_pos()
