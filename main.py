@@ -81,16 +81,10 @@ def isValid(board, num, pos):
 
 
 def solve(board):
-<<<<<<< HEAD:sudokusolver/main.py
     """
     Recursive implementation of solving the board.
     """
-=======
-    '''
-    Recursive implementation of solving the board
-    '''
->>>>>>> b79ae167a80e407e465801000cc6e67c9821f373:PygameBootcamp/SudokuSolver/main.py
-    global margin
+
     # base case - the end of the board has been reached by the algorithm
     # i.e no more empty squares
     find = find_empty(board)
@@ -118,7 +112,6 @@ intro_running = True
 while intro_running:
     screen.fill(white)
     intro_text = ["Hello! This is a sudoku puzzle solver.",
-<<<<<<< HEAD:sudokusolver/main.py
                   "Sudoku is played on a 9x9 board with numbers 1-9",
                   "where the rules are as follows:",
                   "1.  No number may appear in the same row twice.",
@@ -130,19 +123,6 @@ while intro_running:
                   "Click a square and type a number to add it to the board.",
                   "Press SPACE to solve the puzzle and R to reset the board.",
                   "Press SPACE to begin!"]
-=======
-    "Sudoku is played on a 9x9 board with numbers 1-9",
-    "where the rules are as follows:",
-    "1.  No number may appear in the same row twice.",
-    "2. No number may appear in the same column twice.",
-    "3. No number may appear in the same 3x3 square.",
-    # "   marked by thicker lines on the board.", <-- WIP feature
-    "",
-    "Instructions:",
-    "Click a square and type a number to add it to the board.",
-    "Press SPACE to solve the puzzle and R to reset the board.",
-    "Press SPACE to begin!"]
->>>>>>> b79ae167a80e407e465801000cc6e67c9821f373:PygameBootcamp/SudokuSolver/main.py
     label = []
     for line in intro_text:
         label.append(intro_font.render(line, True, black))
